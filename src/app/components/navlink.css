@@ -1,0 +1,25 @@
+.nav-link {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: green; /* Customize the color */
+    left: 0;
+    bottom: -4px; /* Adjust the space between text and underline */
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%; /* Underline expands to full width on hover */
+}
+
+.nav-link:hover {
+    color: #22c55e; /* Customize the hover color */
+}
