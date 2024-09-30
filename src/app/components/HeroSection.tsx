@@ -19,7 +19,7 @@ const HeroSection = () => {
             );
         }, 5000); // Change image every 5 seconds
         return () => clearInterval(interval);
-    }, []);
+    }, [images.length]);
 
     return (
         <div className="relative h-screen">
@@ -56,52 +56,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
-
-
-// "use client";
-
-// import { useState, useEffect } from 'react';
-// import Image from 'next/image';
-
-// const HeroSection = () => {
-//     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-//     const images = [
-//         '/assets/image/bg1.jpg',
-//         '/assets/image/bg2.jpg',
-//         '/assets/image/bg3.jpg',
-//         '/assets/image/bg4.jpg',
-//     ];
-
-//     useEffect(() => {
-//         const interval = setInterval(() => {
-//             setCurrentImageIndex((prevIndex) =>
-//                 prevIndex === images.length - 1 ? 0 : prevIndex + 1
-//             );
-//         }, 5000); // Change image every 5 seconds
-//         return () => clearInterval(interval);
-//     }, []);
-
-//     return (
-//         <div className="relative h-screen">
-//             <div className="absolute inset-0 bg-cover mt-[9rem] md:mt-0 bg-center transition-all duration-1000">
-//                 <Image
-//                     src={images[currentImageIndex]}
-//                     alt="Hero Background"
-//                     layout="fill"
-//                     objectFit="cover"
-//                     priority={true} // Ensures the image is loaded quickly
-//                 />
-//                 <div className="flex flex-col justify-center items-center h-full bg-black bg-opacity-50">
-//                     <h1 className="text-white text-5xl text-center font-bold mb-4">MANDTECH'S MOST PROFESSIONAL <br/> AIR COMPRESSOR PARTS SUPPLIER</h1>
-//                     <p className="text-white text-xl text-center mb-6">The most professional accessories matching solution, the most competitive price, the most reliable trading partner. <br/>ACP provides genuine Atlas Copco/Epiroc/Ingersoll Rand/Sullair and other parts.</p>
-//                     <button className="bg-white text-black px-6 py-3 rounded-full hover:bg-gray-300">
-//                         VIEW ALL PRODUCTS
-//                     </button>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default HeroSection;

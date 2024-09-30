@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTopButton from "./components/ScrollToTop";
 
@@ -34,7 +34,7 @@ export default function RootLayout({
         {/* <header>
           <Navbar />
         </header> */}
-        {/* <div className="mt-[9rem]"></div> */}
+        <div className="mt-[9rem]"></div>
         {children}
         <Footer />
         <ScrollToTopButton />

@@ -1,4 +1,4 @@
-import React from 'react';
+import Image from "next/image";
 
 const Blog = () => {
     return (
@@ -16,11 +16,17 @@ const Blog = () => {
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {/* Blog Post 1 */}
                     <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
-                        <img
-                            src="/assets/image/pat1.jpg"
-                            alt="Air Compressors"
-                            className="w-full h-48 object-cover"
-                        />
+                        <div className="relative w-full h-48">
+                            <Image
+                                src="/assets/image/pat1.jpg"
+                                alt="Air Compressors"
+                                layout="fill"
+                                objectFit="cover"
+                                // width={500}
+                                // height={300}
+                                className="w-full h-full"
+                            />
+                        </div>
                         <div className="p-6">
                             <h2 className="text-2xl font-semibold dark:text-white text-gray-800">The Importance of Air Compressors</h2>
                             <p className="mt-4 text-gray-600">
@@ -37,11 +43,17 @@ const Blog = () => {
 
                     {/* Blog Post 2 */}
                     <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
-                        <img
-                            src="/assets/image/pat2.jpg"
-                            alt="Lubricants"
-                            className="w-full h-48 object-cover"
-                        />
+                        <div className="relative w-full h-48">
+                            <Image
+                                src="/assets/image/pat2.jpg"
+                                alt="Lubricants"
+                                layout="fill"
+                                objectFit="cover"
+                                // width={500}
+                                // height={300}
+                                className="w-full h-full"
+                            />
+                        </div>
                         <div className="p-6">
                             <h2 className="text-2xl font-semibold dark:text-white text-gray-800">Lubricants: Essential for Machine Longevity</h2>
                             <p className="mt-4 text-gray-600">
@@ -58,11 +70,17 @@ const Blog = () => {
 
                     {/* Blog Post 3 */}
                     <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
-                        <img
-                            src="/assets/image/pat3.jpg"
-                            alt="Filters"
-                            className="w-full h-48 object-cover"
-                        />
+                        <div className="relative w-full h-48">
+                            <Image
+                                src="/assets/image/pat3.jpg"
+                                alt="Filters"
+                                layout="fill"
+                                objectFit="cover"
+                                // width={500}
+                                // height={300}
+                                className="w-full h-full"
+                            />
+                        </div>
                         <div className="p-6">
                             <h2 className="text-2xl font-semibold dark:text-white text-gray-800">Filters: Ensuring Clean and Efficient Operations</h2>
                             <p className="mt-4 text-gray-600">
@@ -79,15 +97,21 @@ const Blog = () => {
 
                     {/* Blog Post 4 */}
                     <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
-                        <img
-                            src="/assets/image/pat4.jpg"
-                            alt="Ingersoll Sales"
-                            className="w-full h-48 object-cover"
-                        />
+                        <div className="relative w-full h-48">
+                            <Image
+                                src="/assets/image/pat4.jpg"
+                                alt="Ingersoll Sales"
+                                layout="fill"
+                                objectFit="cover"
+                                // width={500}
+                                // height={300}
+                                className="w-full h-full"
+                            />
+                        </div>
                         <div className="p-6">
                             <h2 className="text-2xl font-semibold dark:text-white text-gray-800">Ingersoll Rand: Leaders in Sales Engineering</h2>
                             <p className="mt-4 text-gray-600">
-                                Explore Ingersoll Rand's legacy in sales engineering, providing innovative solutions for industrial machinery and systems.
+                                Explore Ingersoll Rand&apos;s legacy in sales engineering, providing innovative solutions for industrial machinery and systems.
                             </p>
                             <a
                                 href="#"
@@ -100,11 +124,17 @@ const Blog = () => {
 
                     {/* Blog Post 5 */}
                     <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
-                        <img
-                            src="/assets/image/pat5.jpg"
-                            alt="Maintenance"
-                            className="w-full h-48 object-cover"
-                        />
+                        <div className="relative w-full h-48">
+                            <Image
+                                src="/assets/image/pat5.jpg"
+                                alt="Maintenance"
+                                layout="fill"
+                                objectFit="cover"
+                                // width={500}
+                                // height={300}
+                                className="w-full h-full"
+                            />
+                        </div>
                         <div className="p-6">
                             <h2 className="text-2xl font-semibold dark:text-white text-gray-800">Maintenance Tips for Air Compressors</h2>
                             <p className="mt-4 text-gray-600">

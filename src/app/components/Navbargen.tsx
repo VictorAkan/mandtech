@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import SearchBarNav from "./SearchBarNav";
+// import SearchBarNav from "./SearchBarNav";
 import "./navlink.css";
 
 export default function Navbargen() {
@@ -25,7 +25,7 @@ export default function Navbargen() {
 
         // Create a media query listener for theme changes
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        const handleThemeChange = (e:any) => setIsDark(e.matches);
+        const handleThemeChange = (e:MediaQueryListEvent) => setIsDark(e.matches);
 
         // Add listener for changes
         mediaQuery.addEventListener('change', handleThemeChange);

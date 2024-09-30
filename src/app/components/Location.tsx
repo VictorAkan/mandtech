@@ -13,11 +13,11 @@ const Location = () => {
         message: ''
     });
 
-    const handleChange = (e:any) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e:any) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // Handle form submission logic here
     };
@@ -58,7 +58,7 @@ const Location = () => {
                                 className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
                                 onClick={() => setIsModalOpen(false)}
                             >
-                                Close
+                                &times;
                             </button>
                             <h2 className="mb-4 text-xl text-gray-900 font-bold text-center">Ask For A Quick Quote</h2>
                             <form onSubmit={handleSubmit}>

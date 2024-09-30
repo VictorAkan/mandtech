@@ -25,7 +25,7 @@ export default function Navbar() {
 
         // Create a media query listener for theme changes
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        const handleThemeChange = (e:any) => setIsDark(e.matches);
+        const handleThemeChange = (e:MediaQueryListEvent) => setIsDark(e.matches);
 
         // Add listener for changes
         mediaQuery.addEventListener('change', handleThemeChange);
