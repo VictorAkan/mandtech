@@ -42,7 +42,7 @@ export default function Navbargen() {
             <div className="lg:flex items-center md:block flex justify-between px-4 py-4 md:px-8 md:py-6">
                 {/* LOGO */}
                 <Link href="/">
-                    <Image src="/assets/image/mandlog.png" alt="mandtech-img" width={100} height={100} />
+                    <Image src="/assets/image/manlog.jpg" alt="mandtech-img" width={200} height={200} />
                 </Link>
 
                 {/* MOBILE MENU BUTTON */}
@@ -65,7 +65,7 @@ export default function Navbargen() {
                     {/* <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/product">ALL PRODUCTS</Link> */}
                     {/* Dropdown for "ALL PRODUCTS" */}
             <div className="relative group">
-                <Link className="font-semibold nav-link hover:text-green-500" href="/product">ALL PRODUCTS</Link>
+                <Link className="font-semibold nav-link hover:text-green-500" href="/product">PRODUCTS</Link>
                 <div className="absolute hidden group-hover:block bg-white dark:bg-[#050505] shadow-md rounded-md py-2 w-48 z-20">
                     <Link href="/product/subcategory1" className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
                         Controller
@@ -96,12 +96,16 @@ export default function Navbargen() {
                     </Link>
                 </div>
             </div>
-                    <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/">FILTERS</Link>
-                    <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/">AIREND</Link>
-                    <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/">SERVICE KITS</Link>
-                    <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/">LUBRICANTS</Link>
+                    {/* <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/">FILTERS</Link> */}
+                    {/* <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/">AIREND</Link> */}
+                    {/* <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/">SPARES</Link> */}
+                    {/* <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/">LUBRICANTS</Link> */}
+                    <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/services">SERVICES</Link>
+                    <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/oempartners">OEM PARTNERS</Link>
                     <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/blog">BLOG</Link>
                     <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/contact">CONTACT</Link>
+                    {/* <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/admin">ADMIN</Link> */}
+                    <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/about">ABOUT US</Link>
 
                     {/* CONTACT ICONS - Visible in mobile as well */}
                     <div className="flex md:hidden space-x-2 justify-center">

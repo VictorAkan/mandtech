@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const HeroSection = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -38,18 +39,21 @@ const HeroSection = () => {
             </div>
 
             {/* Text Content */}
-            <div className="relative z-8 flex flex-col justify-center items-center h-full text-center px-4">
+            <div className="relative z-8 flex flex-col mt-24 justify-center items-center h-full text-center px-4">
             <h1 className="text-white font-bold mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-                    MANDTECH'S MOST PROFESSIONAL <br /> AIR COMPRESSOR PARTS SUPPLIER
+                    {/* AIR COMPRESSOR HOME */}
+                    <span className='text-green-500'>MANDTECH SERVICES</span> 
+                    <br />
+                    <span className="font-thin text-[2rem]">YOUR TRUSTED PARTNER IN AIR COMPRESSOR SOLUTIONS</span>
                 </h1>
                 <p className="text-white mb-6 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-                    The most professional accessories matching solution, the most competitive price, the most reliable trading partner.
+                    {/* The most professional accessories matching solution, the most competitive price, the most reliable trading partner. */}
                     {/* <br /> */}
-                    ACP provides genuine Atlas Copco/Epiroc/Ingersoll Rand/Sullair and other parts.
+                    {/* We provide top notch services for Atlas Copco/Ingersoll Rand/Sullair  */}
                 </p>
-                <button className="bg-white text-black px-6 py-3 rounded-full hover:bg-gray-300 text-sm sm:text-base md:text-lg lg:text-xl">
+                <Link href="/product" className="bg-white text-black px-6 py-3 rounded-full hover:bg-gray-300 text-sm sm:text-base md:text-lg lg:text-xl">
                     VIEW ALL PRODUCTS
-                </button>
+                </Link>
             </div>
         </div>
     );

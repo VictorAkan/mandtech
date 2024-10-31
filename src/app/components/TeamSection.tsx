@@ -3,9 +3,9 @@ import Image from 'next/image';
 const TeamSection = () => {
     const teamMembers = [
         {
-            name: 'Mbuotidem John',
-            imageUrl: '/assets/image/mb.jpg', // Example path, replace with your actual image
-            story: `John has been working in the industry for over a decade. His experience spans across various fields, making him an essential part of the team. John’s passion for innovation and creativity drives the team forward, ensuring that every project reaches its full potential. He’s a mentor to many and a constant source of inspiration.`,
+            name: 'Tomas Lee',
+            imageUrl: '/assets/image/tomas.png', // Example path, replace with your actual image
+            story: `Tomas has been working in the industry for over a decade. His experience spans across various fields, making him an essential part of the team. Toma’s passion for innovation and creativity drives the team forward, ensuring that every project reaches its full potential. He’s a mentor to many and a constant source of inspiration.`,
         },
         {
             name: 'Carter Yang',

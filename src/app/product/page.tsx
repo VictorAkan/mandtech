@@ -1,13 +1,23 @@
-import Navbargen from "../components/Navbargen"
+"use client";
+
+import Navbar from "../components/Navbar"
+import Products from "../components/AllProducts"
+import SearchBar from "../components/Searchbar"
+import ProductHead from "../components/ProductHead"
+import { useState } from "react"
 
 export default function ProductPage() {
+    const [selectedCategory, setSelectedCategory] = useState('service kits');
+
     return (
         <div>
             <header>
-                <Navbargen />
+                <Navbar />
             </header>
-        <div className="mt-[9rem]"></div>
-        Product page
+        {/* <div className="mt-[9rem]"></div> */}
+        <ProductHead category={selectedCategory} />
+        <SearchBar />
+        <Products selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
         </div>
     )
 }

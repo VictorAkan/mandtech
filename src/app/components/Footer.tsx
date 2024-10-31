@@ -10,7 +10,7 @@ const Footer = () => {
                 {/* Logo and Title */}
                 <div className="flex flex-col items-center md:items-start">
                     <Image
-                        src="/assets/image/mandlog.png" // Replace with your actual logo path
+                        src="/assets/image/manlog.jpg" // Replace with your actual logo path
                         alt="Company Logo"
                         width={100}
                         height={50}
@@ -35,10 +35,10 @@ const Footer = () => {
                         <a href="https://www.facebook.com/mandtechservices?mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" className="dark:hover:text-white hover:text-gray-700">
                             <FaFacebook size={24} />
                         </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:text-gray-700">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="dark:hover:text-white hover:text-gray-700">
                             <FaTwitter size={24} />
                         </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:text-gray-700">
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="dark:hover:text-white hover:text-gray-700">
                             <FaInstagram size={24} />
                         </a>
                     </div>

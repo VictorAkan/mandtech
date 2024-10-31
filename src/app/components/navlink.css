@@ -10,16 +10,79 @@
     position: absolute;
     width: 0;
     height: 2px;
-    background-color: green; /* Customize the color */
+    background-color: green;
+    /* Customize the color */
     left: 0;
-    bottom: -4px; /* Adjust the space between text and underline */
+    bottom: -4px;
+    /* Adjust the space between text and underline */
     transition: width 0.3s ease;
 }
 
 .nav-link:hover::after {
-    width: 100%; /* Underline expands to full width on hover */
+    width: 100%;
+    /* Underline expands to full width on hover */
 }
 
 .nav-link:hover {
-    color: #22c55e; /* Customize the hover color */
+    color: #22c55e;
+    /* Customize the hover color */
+}
+
+/* Logo Styling */
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: relative;
+    flex-direction: column;
+    background-color: white;
+}
+
+.letter {
+    font-size: 2rem;
+    font-weight: bold;
+    animation: float 2s ease-in-out infinite, colorChange 5s linear infinite;
+}
+
+/* Color-changing animation */
+@keyframes colorChange {
+    0% {
+        color: green;
+    }
+
+    66% {
+        color: orange;
+    }
+
+    100% {
+        color: green;
+    }
+}
+
+/* Float animation */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+.underline-container {
+    /* display: flex; */
+    gap: 4px;
+    /* margin-top: 4px; */
+}
+
+/* Three lines under the logo */
+.underline {
+    width: 180px;
+    height: 4px;
+    background-color: black;
+    animation: colorChange 5s linear infinite;
 }

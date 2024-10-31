@@ -9,7 +9,7 @@ export default function ContactPage() {
             <header>
                 <Navbargen />
             </header>
-        <div className="mt-[9rem]"></div>
+        <div className="lg:mt-[7rem] md:mt-[13rem] mt-[5rem]"></div>
             <ContactUs />
             <CompanySection />
             <Location />

@@ -34,7 +34,7 @@ export default function RootLayout({
         {/* <header>
           <Navbar />
         </header> */}
-        <div className="mt-[9rem]"></div>
+        {/* <div className="md:mt-0 mt-[9rem]"></div> */}
         {children}
         <Footer />
         <ScrollToTopButton />
