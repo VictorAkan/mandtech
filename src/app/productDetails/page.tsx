@@ -9,8 +9,17 @@ import 'react-medium-image-zoom/dist/styles.css';
 
 import Navbargen from '../components/Navbargen';
 
+interface Product {
+    imageUrl: string;
+    productName: string;
+    category: string;
+    tag: string;
+    pnID: string;
+    origin: string;
+}
+
 const ProductDetails = () => {
-    const [product, setProduct] = useState(null);
+    const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -23,7 +32,8 @@ const ProductDetails = () => {
             const docRef = doc(db, "products", id);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                setProduct(docSnap.data());
+                const data = docSnap.data() as Product; // Cast to Product
+                setProduct(data);
             } else {
                 console.error("No such document!");
             }
@@ -34,6 +44,10 @@ const ProductDetails = () => {
     }, []);
 
     if (loading) return <p className="text-center text-lg mt-20">Loading...</p>;
+
+    if (!product) {
+        return <p className="text-center text-lg mt-20">Product not found.</p>;
+    }
 
     return (
         <>
