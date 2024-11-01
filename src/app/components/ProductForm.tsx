@@ -32,41 +32,16 @@ const AddProduct = () => {
         return true;
     };
 
-    const handleImageUpload = () => {
-        return new Promise((resolve, reject) => {
-            if (!image) {
-                reject(new Error("No image selected"));
-                return;
-            }
-            
-            const storageRef = ref(storage, `productImages/${image.name}`);
-            const uploadTask = uploadBytesResumable(storageRef, image);
-    
-            uploadTask.on(
-                'state_changed',
-                (snapshot) => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    setUploadProgress(progress);
-                },
-                (error) => {
-                    reject(error);
-                },
-                () => {
-                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                        setImageURL(downloadURL);
-                        resolve(downloadURL);
-                    });
-                }
-            );
-        });
-    };
-    
-
     // const handleImageUpload = () => {
     //     return new Promise((resolve, reject) => {
+    //         if (!image) {
+    //             reject(new Error("No image selected"));
+    //             return;
+    //         }
+            
     //         const storageRef = ref(storage, `productImages/${image.name}`);
     //         const uploadTask = uploadBytesResumable(storageRef, image);
-
+    
     //         uploadTask.on(
     //             'state_changed',
     //             (snapshot) => {
@@ -85,6 +60,31 @@ const AddProduct = () => {
     //         );
     //     });
     // };
+    
+
+    const handleImageUpload = () => {
+        return new Promise((resolve, reject) => {
+            const storageRef = ref(storage, `productImages/${image.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, image);
+
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    setUploadProgress(progress);
+                },
+                (error) => {
+                    reject(error);
+                },
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        setImageURL(downloadURL);
+                        resolve(downloadURL);
+                    });
+                }
+            );
+        });
+    };
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
