@@ -11,11 +11,11 @@ const ServiceModal = ({ service, onClose }: any) => {
         message: ''
     });
 
-    const handleChange = (e) => {
+    const handleChange = (e:any) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e:any) => {
         e.preventDefault();
         // Handle form submission logic here
         console.log('Form data:', formData);
@@ -84,7 +84,7 @@ const ServiceModal = ({ service, onClose }: any) => {
                             onChange={handleChange}
                             required
                             className="w-full p-2 border rounded text-gray-800"
-                            rows="4"
+                            rows={4}
                         />
                     </div>
                     <button type="submit" className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700">
