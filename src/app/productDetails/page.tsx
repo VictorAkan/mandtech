@@ -7,6 +7,7 @@ import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 
 import Navbargen from '../components/Navbargen';
+import { Loader } from '../components/Loader';
 
 interface Product {
     imageUrl: string;
@@ -44,7 +45,7 @@ const ProductDetails = () => {
         }
     }, []);
 
-    if (loading) return <p className="text-center text-lg mt-20">Loading...</p>;
+    if (loading) return <Loader />;
 
     if (!product) {
         return <p className="text-center text-lg mt-20">Product not found.</p>;
