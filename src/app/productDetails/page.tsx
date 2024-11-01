@@ -1,4 +1,3 @@
-// pages/productDetails.js
 "use client";
 
 import { useEffect, useState } from 'react';
@@ -23,24 +22,26 @@ const ProductDetails = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchProduct = async () => {
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get('id');
+        if (typeof window !== "undefined") {
+            const fetchProduct = async () => {
+                const params = new URLSearchParams(window.location.search);
+                const id = params.get('id');
 
-            if (!id) return;
+                if (!id) return;
 
-            const docRef = doc(db, "products", id);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                const data = docSnap.data() as Product; // Cast to Product
-                setProduct(data);
-            } else {
-                console.error("No such document!");
-            }
-            setLoading(false);
-        };
+                const docRef = doc(db, "products", id);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data() as Product;
+                    setProduct(data);
+                } else {
+                    console.error("No such document!");
+                }
+                setLoading(false);
+            };
 
-        fetchProduct();
+            fetchProduct();
+        }
     }, []);
 
     if (loading) return <p className="text-center text-lg mt-20">Loading...</p>;
@@ -76,7 +77,7 @@ const ProductDetails = () => {
                     <div className="mt-6">
                         <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">Product Details</h2>
                         <div className="mt-4 text-gray-600">
-                            <p className="py-2 dark:text-gray-300"><strong className="text-gray-700 dark:text-gray-100">Category:</strong> {product.category}</p>
+                            <p className="py-2 dark:text-gray-300 capitalize"><strong className="text-gray-700 dark:text-gray-100">Category:</strong> {product.category}</p>
                             <p className="py-2 dark:text-gray-300"><strong className="text-gray-700 dark:text-gray-100">Product Name:</strong> {product.productName}</p>
                             <p className="py-2 dark:text-gray-300"><strong className="text-gray-700 dark:text-gray-100">Tag:</strong> {product.tag}</p>
                             <p className="py-2 dark:text-gray-300"><strong className="text-gray-700 dark:text-gray-100">PN:</strong> {product.pnID}</p>
