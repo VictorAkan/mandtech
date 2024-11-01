@@ -1,9 +1,17 @@
+// {
+//   "eslintConfig": {
+//     "extends": ["next/core-web-vitals", "next/typescript"],
+//     "rules": {
+//       "react-hooks/exhaustive-deps": "off"
+//     }
+//   }
+// }
+
+
 {
-  "eslintConfig": {
-    "extends": ["next/core-web-vitals", "next/typescript"],
-    "rules": {
-      "react-hooks/exhaustive-deps": "off"
-    }
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    "react-hooks/exhaustive-deps": "off"
   }
 }
 
