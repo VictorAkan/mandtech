@@ -6,24 +6,31 @@ import { collection, getDocs } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { db } from '../firebase/firebaseConfig';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { Loader } from './Loader';
 
 const categories = [
     { name: 'service kits', subcategories: [] },
     { name: 'filters', subcategories: ['Air/Oil Filter', 'Separator'] },
-    { name: 'compressor parts', subcategories: ['Controller', 'Bearings and gears', 'Cooling System', 'Couplings', 'Fan', 'Motor', 'Pipes hoses and flexibles', 'Seals and o-rings', 'Sensors and switches', 'Valves', 'Other Compressor Parts'] },
+    { name: 'compressor parts', subcategories: ['controller', 'bearings and gears', 'cooling system', 'couplings', 'fan', 'motor', 'pipes hoses and flexibles', 'seals and o-rings', 'sensors and switches', 'valves', 'other compressor parts'] },
     { name: 'air end', subcategories: [] },
     { name: 'lubricants', subcategories: [] },
     { name: 'ingersoll rand', subcategories: [] },
     { name: 'sullair', subcategories: [] },
+    { name: 'denair', subcategories: [] },
+    { name: 'comair', subcategories: [] },
+    { name: 'jmg', subcategories: [] },
+    { name: 'kaeser', subcategories: [] },
 ];
 
 const Products = ({ selectedCategory, setSelectedCategory }: any) => {
     const [products, setProducts] = useState<any[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
     const productsPerPage = 9;
 
     useEffect(() => {
+        setLoading(true);
         const fetchProducts = async () => {
             const productsArray: any[] = [];
             const querySnapshot = await getDocs(collection(db, "products"));
@@ -40,6 +47,7 @@ const Products = ({ selectedCategory, setSelectedCategory }: any) => {
                     img: imageURL,
                     category: productData.category,
                 });
+                setLoading(false);
                 setProducts([...productsArray]);
             });
         };
@@ -67,6 +75,8 @@ const Products = ({ selectedCategory, setSelectedCategory }: any) => {
 
     const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
 
+    if (loading) return (<Loader />);
+
     return (
         <div className="flex flex-col md:flex-row">
             {/* Sidebar */}
@@ -93,7 +103,7 @@ const Products = ({ selectedCategory, setSelectedCategory }: any) => {
                                     {category.subcategories.map((sub, subIndex) => (
                                         <li key={subIndex} className="py-2 px-3 w-full hover:bg-green-300 rounded cursor-pointer">
                                             <button
-                                                className={`w-full text-left hover:text-black text-sm ${selectedCategory === sub ? 'bg-green-400 text-gray-700' : 'text-gray-700 dark:text-gray-200'}`}
+                                                className={`w-full text-left capitalize hover:text-black text-sm ${selectedCategory === sub ? 'bg-green-400 text-gray-700' : 'text-gray-700 dark:text-gray-200'}`}
                                                 onClick={() => handleCategoryClick(sub)}
                                             >
                                                 {sub}

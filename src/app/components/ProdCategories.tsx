@@ -3,14 +3,14 @@ import Link from "next/link";
 
 export default function ProdCategories() {
     const products = [
-        { name: 'Filters', imgSrc: '/assets/image/filters.png' },
-        { name: 'Lubricants', imgSrc: '/assets/image/lubricants.png' },
-        { name: 'Kits', imgSrc: '/assets/image/kits.png' },
-        { name: 'Air End', imgSrc: '/assets/image/airend.png' },
-        { name: 'Motor', imgSrc: '/assets/image/motor.png' },
-        { name: 'Sensors', imgSrc: '/assets/image/sensors.png' },
-        { name: 'Controllers', imgSrc: '/assets/image/controllers.png' },
-        { name: 'Epiroc', imgSrc: '/assets/image/epiroc.png' },
+        { name: 'filters', imgSrc: '/assets/image/filters.png', category: 'filters' },
+        { name: 'lubricants', imgSrc: '/assets/image/lubricants.png', category: 'lubricants' },
+        { name: 'kits', imgSrc: '/assets/image/kits.png', category: 'kits' },
+        { name: 'air end', imgSrc: '/assets/image/airend.png', category: 'air end' },
+        { name: 'motor', imgSrc: '/assets/image/motor.png', category: 'motor' },
+        { name: 'sensors', imgSrc: '/assets/image/sensors.png', category: 'sensors' },
+        { name: 'controllers', imgSrc: '/assets/image/controllers.png', category: 'controller' },
+        { name: 'epiroc', imgSrc: '/assets/image/epiroc.png', category: 'epiroc' },
     ];
 
     return (
@@ -22,7 +22,7 @@ export default function ProdCategories() {
             <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
                 {products.map((product, index) => (
                     <div key={index} className="text-center">
-                        <Link href="/">
+                        <Link href={{ pathname: '/productsbpage', query: { subcategory: product.category } }} >
                             <Image
                                 src={product.imgSrc}
                                 alt={product.name}
@@ -31,7 +31,7 @@ export default function ProdCategories() {
                                 className="w-full h-auto object-cover rounded-lg hover:scale-110 transition-transform duration-300"
                             />
                         </Link>
-                        <p className="mt-4 font-semibold text-lg">{product.name}</p>
+                        <p className="mt-4 font-semibold capitalize text-lg">{product.name}</p>
                     </div>
                 ))}
             </div>

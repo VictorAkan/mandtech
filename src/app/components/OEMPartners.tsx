@@ -1,13 +1,24 @@
 import OEMPartnersSection from "./OEMPartnersSection";
 
+// const partners = [
+//     { name: 'Atlas Copco', logo: '/assets/image/atlascopco.png', url: 'https://www.atlascopco.com/' },
+//     { name: 'Ingersoll Rand', logo: '/assets/image/ingersollrand.png', url: 'https://www.ingersollrand.com/' },
+//     { name: 'Sullair', logo: '/assets/image/sullair.png', url: 'https://www.sullair.com/' },
+//     { name: 'Denair', logo: '/assets/image/denair.png', url: 'https://www.denair.net/' },
+//     { name: 'Comair', logo: '/assets/image/comair.png', url: 'https://www.comaircorp.com/' },
+//     { name: 'JMG', logo: '/assets/image/jmg.png', url: 'https://www.jmglimited.com/' },
+//     { name: 'Kaeser', logo: '/assets/image/kaeser.png', url: 'https://us.kaeser.com/' },
+//     // Add more partners as needed
+// ];
+
 const partners = [
-    { name: 'Atlas Copco', logo: '/assets/image/atlascopco.png', url: 'https://www.atlascopco.com/' },
-    { name: 'Ingersoll Rand', logo: '/assets/image/ingersollrand.png', url: 'https://www.ingersollrand.com/' },
-    { name: 'Sullair', logo: '/assets/image/sullair.png', url: 'https://www.sullair.com/' },
-    { name: 'Denair', logo: '/assets/image/denair.png', url: 'https://www.denair.net/' },
-    { name: 'Comair', logo: '/assets/image/comair.png', url: 'https://www.comaircorp.com/' },
-    { name: 'JMG', logo: '/assets/image/jmg.png', url: 'https://www.jmglimited.com/' },
-    { name: 'Kaeser', logo: '/assets/image/kaeser.png', url: 'https://us.kaeser.com/' },
+    { name: 'Atlas Copco', logo: '/assets/image/atlascopco.png', category: 'compressor parts' },
+    { name: 'Ingersoll Rand', logo: '/assets/image/ingersollrand.png', category: 'ingersoll rand' },
+    { name: 'Sullair', logo: '/assets/image/sullair.png', category: 'sullair' },
+    { name: 'Denair', logo: '/assets/image/denair.png', category: 'denair' },
+    { name: 'Comair', logo: '/assets/image/comair.png', category: 'comair' },
+    { name: 'JMG', logo: '/assets/image/jmg.png', category: 'jmg' },
+    { name: 'Kaeser', logo: '/assets/image/kaeser.png', category: 'kaeser' },
     // Add more partners as needed
 ];
 

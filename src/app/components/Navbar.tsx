@@ -4,12 +4,65 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import SearchBarNav from "./SearchBarNav";
+import emailjs from "emailjs-com";
 import "./navlink.css";
+
+const Modal = ({ children, isOpen, onClose }: any) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 z-50 bg-gray-500 bg-opacity-50 transition-opacity">
+            <div className="flex items-center justify-center min-h-screen pt-4 px-4">
+                <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+                    {children}
+                    <button onClick={onClose} className="mt-4 px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-700 focus:outline-none">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default function Navbar() {
     const [navbar, setNavbar] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [isDark, setIsDark] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        companyName: '',
+        whatsapp: '',
+        message: ''
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        try {
+            await emailjs.sendForm(
+                'service_xau1lhm',
+                'template_awnd4cx',
+                e.target,
+                'TJ5Q4YnHgoDF4U20i'
+            );
+            setIsModalOpen(true); // Show modal on success
+            setFormData({
+                name: '',
+                email: '',
+                companyName: '',
+                whatsapp: '',
+                message: '',
+            });
+        } catch (error) {
+            console.error('Email sending failed:', error);
+            // Handle errors (optional: display an error message)
+        }
+    };
 
     // Function to check the theme and set isDark state
     const checkTheme = () => {
@@ -43,23 +96,6 @@ export default function Navbar() {
                     {/* LOGO */}
                     <Link href="/">
                         <Image src="/assets/image/manlog.jpg" alt="mandtech-img" width={200} height={200} />
-                        {/* <div className="logo-container">
-                            <div className="flex">
-                            <div className="letter">M</div>
-                            <div className="letter">A</div>
-                            <div className="letter">N</div>
-                            <div className="letter">D</div>
-                            <div className="letter">T</div>
-                            <div className="letter">E</div>
-                            <div className="letter">C</div>
-                            <div className="letter">H</div>
-                            </div>
-                            <div className="underline-container">
-                                <div className="underline"></div>
-                                <div className="underline"></div>
-                                <div className="underline"></div>
-                            </div>
-                        </div> */}
 
                     </Link>
 
@@ -85,40 +121,36 @@ export default function Navbar() {
                         <div className="relative group">
                             <Link className="font-semibold nav-link hover:text-green-500" href="/product">PRODUCTS</Link>
                             <div className="absolute hidden group-hover:block bg-white dark:bg-[#050505] shadow-md rounded-md py-2 w-48 z-20">
-                                <Link href="/product/subcategory1" className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+                                <Link href={{ pathname: '/productsbpage', query: { subcategory: 'controller' } }} className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
                                     Controller
                                 </Link>
-                                <Link href="/product/subcategory2" className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+                                <Link href={{ pathname: '/productsbpage', query: { subcategory: 'compressor parts' } }} className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
                                     Compressor Parts
                                 </Link>
-                                <Link href="/product/subcategory3" className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+                                <Link href={{ pathname: '/productsbpage', query: { subcategory: 'air/oil filter' } }} className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
                                     Air/Oil Filter
                                 </Link>
-                                <Link href="/product/subcategory3" className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+                                <Link href={{ pathname: '/productsbpage', query: { subcategory: 'seperator' } }} className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
                                     Seperator
                                 </Link>
-                                <Link href="/product/subcategory3" className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+                                <Link href={{ pathname: '/productsbpage', query: { subcategory: 'motor' } }} className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
                                     Motor
                                 </Link>
-                                <Link href="/product/subcategory3" className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+                                <Link href={{ pathname: '/productsbpage', query: { subcategory: 'couplings' } }} className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
                                     Couplings
                                 </Link>
-                                <Link href="/product/subcategory3" className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+                                <Link href={{ pathname: '/productsbpage', query: { subcategory: 'pipes hoses and flexibles' } }} className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
                                     Pipes hoses and flexibles
                                 </Link>
-                                <Link href="/product/subcategory3" className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+                                <Link href={{ pathname: '/productsbpage', query: { subcategory: 'seals and o-rings' } }} className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
                                     Seals and o-rings
                                 </Link>
-                                <Link href="/product/subcategory3" className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+                                <Link href={{ pathname: '/productsbpage', query: { subcategory: 'bearings and gears' } }} className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
                                     Bearings and gears
                                 </Link>
                             </div>
                         </div>
-                        {/* <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/">FILTERS</Link> */}
-                        {/* <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/">AIREND</Link> */}
-                        {/* <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/">SPARES</Link> */}
-                        {/* <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/">LUBRICANTS</Link> */}
-                        <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/services">SERVICES</Link>
+                        <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/servicessec">SERVICES</Link>
                         <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/oempartners">OEM PARTNERS</Link>
                         <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/blog">BLOG</Link>
                         <Link className="font-semibold nav-link hover:text-green-500" onClick={() => setNavbar(!navbar)} href="/contact">CONTACT</Link>
@@ -151,6 +183,9 @@ export default function Navbar() {
             {/* Modal */}
             {showModal ? (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                            <p className="text-center text-green-500 font-bold">Email Sent Successfully!</p>
+                    </Modal>
                     <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6 space-y-4 relative">
                         <button
                             className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
@@ -159,15 +194,18 @@ export default function Navbar() {
                             &times;
                         </button>
                         <h2 className="text-xl font-bold text-gray-800">Send Us An Email</h2>
-                        <form className="space-y-4">
+                        <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">
                                     Your Name
                                 </label>
                                 <input
                                     type="text"
+                                    name="name"
                                     className="mt-1 w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                                     placeholder="Enter your name"
+                                    value={formData.name}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -177,8 +215,11 @@ export default function Navbar() {
                                 </label>
                                 <input
                                     type="text"
+                                    name="companyName"
                                     className="mt-1 w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                                     placeholder="Company's name"
+                                    value={formData.companyName}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -188,8 +229,11 @@ export default function Navbar() {
                                 </label>
                                 <input
                                     type="text"
+                                    name="whatsapp"
                                     className="mt-1 w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                                     placeholder="Whatsapp number"
+                                    value={formData.whatsapp}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -199,8 +243,11 @@ export default function Navbar() {
                                 </label>
                                 <input
                                     type="email"
+                                    name="email"
                                     className="mt-1 w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                                     placeholder="Enter your email"
+                                    value={formData.email}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -211,7 +258,10 @@ export default function Navbar() {
                                 <textarea
                                     className="mt-1 w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                                     placeholder="Type your message"
+                                    name="message"
                                     rows={4}
+                                    value={formData.message}
+                                    onChange={handleChange}
                                     required
                                 ></textarea>
                             </div>

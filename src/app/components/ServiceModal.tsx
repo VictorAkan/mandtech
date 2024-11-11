@@ -1,29 +1,69 @@
 "use client";
 
 import { useState } from 'react';
+import emailjs from "emailjs-com";
+
+const Modal = ({ children, isOpen, onClose }: any) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 z-50 bg-gray-500 bg-opacity-50 transition-opacity">
+            <div className="flex items-center justify-center min-h-screen pt-4 px-4">
+                <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+                    {children}
+                    <button onClick={onClose} className="mt-4 px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-700 focus:outline-none">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const ServiceModal = ({ service, onClose }: any) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         companyName: '',
-        whatsappNumber: '',
+        whatsapp: '',
         email: '',
-        message: ''
+        message: '',
+        sservice: service,
     });
 
     const handleChange = (e:any) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e:any) => {
+    const handleSubmit = async (e:any) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log('Form data:', formData);
-        onClose();  // Close the modal on submission
+        try {
+            await emailjs.sendForm(
+                'service_xau1lhm',
+                'template_cc03r0f',
+                e.target,
+                'TJ5Q4YnHgoDF4U20i'
+            );
+            setIsModalOpen(true); // Show modal on success
+            setFormData({
+                name: '',
+                email: '',
+                companyName: '',
+                whatsapp: '',
+                message: '',
+                sservice: service,
+            });
+        } catch (error) {
+            console.error('Email sending failed:', error);
+            // Handle errors (optional: display an error message)
+        }
     };
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                <p className="text-center text-green-500 font-bold">Email Sent Successfully!</p>
+            </Modal>
             <div className="relative bg-white w-full max-w-md mx-4 p-6 rounded-lg shadow-lg">
                 <button
                     onClick={onClose}
@@ -33,6 +73,11 @@ const ServiceModal = ({ service, onClose }: any) => {
                 </button>
                 <h2 className="text-2xl text-gray-900 font-bold mb-4 text-center">{service}</h2>
                 <form onSubmit={handleSubmit}>
+                <input
+                        type="hidden"
+                        name="service"
+                        value={formData.sservice}
+                    />
                     <div className="mb-4">
                         <label className="block text-sm text-gray-900 font-semibold mb-2">Name</label>
                         <input
@@ -58,8 +103,8 @@ const ServiceModal = ({ service, onClose }: any) => {
                         <label className="block text-sm text-gray-700 font-semibold mb-2">WhatsApp Number</label>
                         <input
                             type="text"
-                            name="whatsappNumber"
-                            value={formData.whatsappNumber}
+                            name="whatsapp"
+                            value={formData.whatsapp}
                             onChange={handleChange}
                             required
                             className="w-full p-2 border rounded text-gray-800"

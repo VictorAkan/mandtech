@@ -2,9 +2,28 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import emailjs from 'emailjs-com';
+
+const Modal = ({ children, isOpen, onClose }: any) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 z-50 bg-gray-500 bg-opacity-50 transition-opacity">
+            <div className="flex items-center justify-center min-h-screen pt-4 px-4">
+                <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+                    {children}
+                    <button onClick={onClose} className="mt-4 px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-700 focus:outline-none">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const Location = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSecModalOpen, setIsSecModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -17,9 +36,27 @@ const Location = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
-        // Handle form submission logic here
+        try {
+            await emailjs.sendForm(
+                'service_xau1lhm',
+                'template_awnd4cx',
+                e.target,
+                'TJ5Q4YnHgoDF4U20i'
+            );
+            setIsSecModalOpen(true); // Show modal on success
+            setFormData({
+                name: '',
+                email: '',
+                companyName: '',
+                whatsapp: '',
+                message: '',
+            });
+        } catch (error) {
+            console.error('Email sending failed:', error);
+            // Handle errors (optional: display an error message)
+        }
     };
 
     return (
@@ -53,6 +90,9 @@ const Location = () => {
                 {/* Modal for Form */}
                 {isModalOpen && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                        <Modal isOpen={isSecModalOpen} onClose={() => setIsSecModalOpen(false)}>
+                            <p className="text-center text-green-500 font-bold">Email Sent Successfully!</p>
+                        </Modal>
                         <div className="relative w-full max-w-lg p-8 bg-white rounded-lg shadow-lg">
                             <button
                                 className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
@@ -68,7 +108,7 @@ const Location = () => {
                                         type="text"
                                         id="name"
                                         name="name"
-                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-3 py-2 text-gray-950 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                                         placeholder="Your name"
                                         value={formData.name}
                                         onChange={handleChange}
@@ -82,7 +122,7 @@ const Location = () => {
                                         type="email"
                                         id="email"
                                         name="email"
-                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-3 py-2 text-gray-950 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                                         placeholder="Your email"
                                         value={formData.email}
                                         onChange={handleChange}
@@ -96,7 +136,7 @@ const Location = () => {
                                         type="text"
                                         id="companyName"
                                         name="companyName"
-                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-3 py-2 text-gray-950 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                                         placeholder="Your company name"
                                         value={formData.companyName}
                                         onChange={handleChange}
@@ -109,7 +149,7 @@ const Location = () => {
                                         type="text"
                                         id="whatsapp"
                                         name="whatsapp"
-                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-3 py-2 text-gray-950 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                                         placeholder="Your WhatsApp number"
                                         value={formData.whatsapp}
                                         onChange={handleChange}
@@ -122,7 +162,7 @@ const Location = () => {
                                     <textarea
                                         id="message"
                                         name="message"
-                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-3 py-2 text-gray-950 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                                         rows={4}
                                         placeholder="Your message"
                                         value={formData.message}
