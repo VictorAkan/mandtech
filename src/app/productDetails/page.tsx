@@ -45,6 +45,22 @@ const ProductDetails = () => {
         }
     }, []);
 
+    const handleRequestClick = () => {
+        if (product) {
+            // Construct query parameters for navigation
+            const queryString = new URLSearchParams({
+                imageUrl: product.imageUrl,
+                productName: product.productName,
+                category: product.category,
+                tag: product.tag,
+                pnID: product.pnID,
+                origin: product.origin,
+            }).toString();
+
+            window.location.href = `/ctaForm?${queryString}`; // Navigate to request form with query parameters
+        }
+    };
+
     if (loading) return <Loader />;
 
     if (!product) {
@@ -84,6 +100,13 @@ const ProductDetails = () => {
                             <p className="py-2 dark:text-gray-300"><strong className="text-gray-700 dark:text-gray-100">PN:</strong> {product.pnID}</p>
                             <p className="py-2 dark:text-gray-300"><strong className="text-gray-700 dark:text-gray-100">Origin:</strong> {product.origin}</p>
                         </div>
+
+                        <button 
+                        onClick={handleRequestClick}
+                        className="mt-6 bg-green-500 text-white p-2 rounded"
+                    >
+                        Order Product
+                    </button>
                     </div>
                 </div>
             </div>

@@ -4,12 +4,65 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 // import SearchBarNav from "./SearchBarNav";
+import emailjs from "emailjs-com";
 import "./navlink.css";
+
+const Modal = ({ children, isOpen, onClose }: any) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 z-50 bg-gray-500 bg-opacity-50 transition-opacity">
+            <div className="flex items-center justify-center min-h-screen pt-4 px-4">
+                <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+                    {children}
+                    <button onClick={onClose} className="mt-4 px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-700 focus:outline-none">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default function Navbargen() {
     const [navbar, setNavbar] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [isDark, setIsDark] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        companyName: '',
+        whatsapp: '',
+        message: ''
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        try {
+            await emailjs.sendForm(
+                'service_xau1lhm',
+                'template_awnd4cx',
+                e.target,
+                'TJ5Q4YnHgoDF4U20i'
+            );
+            setIsModalOpen(true); // Show modal on success
+            setFormData({
+                name: '',
+                email: '',
+                companyName: '',
+                whatsapp: '',
+                message: '',
+            });
+        } catch (error) {
+            console.error('Email sending failed:', error);
+            // Handle errors (optional: display an error message)
+        }
+    };
 
     // Function to check the theme and set isDark state
     const checkTheme = () => {
@@ -43,6 +96,7 @@ export default function Navbargen() {
                     {/* LOGO */}
                     <Link href="/">
                         <Image src="/assets/image/manlog.jpg" alt="mandtech-img" width={200} height={200} />
+
                     </Link>
 
                     {/* MOBILE MENU BUTTON */}
@@ -129,6 +183,9 @@ export default function Navbargen() {
             {/* Modal */}
             {showModal ? (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                            <p className="text-center text-green-500 font-bold">Email Sent Successfully!</p>
+                    </Modal>
                     <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6 space-y-4 relative">
                         <button
                             className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
@@ -137,15 +194,18 @@ export default function Navbargen() {
                             &times;
                         </button>
                         <h2 className="text-xl font-bold text-gray-800">Send Us An Email</h2>
-                        <form className="space-y-4">
+                        <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">
                                     Your Name
                                 </label>
                                 <input
                                     type="text"
+                                    name="name"
                                     className="mt-1 w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                                     placeholder="Enter your name"
+                                    value={formData.name}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -155,8 +215,11 @@ export default function Navbargen() {
                                 </label>
                                 <input
                                     type="text"
+                                    name="companyName"
                                     className="mt-1 w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                                     placeholder="Company's name"
+                                    value={formData.companyName}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -166,8 +229,11 @@ export default function Navbargen() {
                                 </label>
                                 <input
                                     type="text"
+                                    name="whatsapp"
                                     className="mt-1 w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                                     placeholder="Whatsapp number"
+                                    value={formData.whatsapp}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -177,8 +243,11 @@ export default function Navbargen() {
                                 </label>
                                 <input
                                     type="email"
+                                    name="email"
                                     className="mt-1 w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                                     placeholder="Enter your email"
+                                    value={formData.email}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -189,7 +258,10 @@ export default function Navbargen() {
                                 <textarea
                                     className="mt-1 w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                                     placeholder="Type your message"
+                                    name="message"
                                     rows={4}
+                                    value={formData.message}
+                                    onChange={handleChange}
                                     required
                                 ></textarea>
                             </div>
