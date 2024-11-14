@@ -1,5 +1,7 @@
 import Navbargen from "../components/Navbargen";
 import CTAForm from "../components/CTAForm";
+import { Suspense } from "react";
+import { Loader } from "../components/Loader";
 
 export default function CTAFormPage() {
     return (
@@ -8,7 +10,9 @@ export default function CTAFormPage() {
                 <Navbargen />
             </header>
             <div className="lg:mt-[11rem] md:mt-[13rem] mt-[5rem]"></div>
-            <CTAForm />
+            <Suspense fallback={<Loader />}>
+                <CTAForm />
+            </Suspense>
         </div>
     )
 }
